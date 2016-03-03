@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Location" table="location" catalog="vutbus" optimistic-lock="version">
+        <id name="locationid" type="string">
+            <column name="LOCATIONID" length="25" />
+            <generator class="assigned" />
+        </id>
+        <property name="locationTicketPrice" type="java.lang.Integer">
+            <column name="LOCATION_TICKET_PRICE" />
+        </property>
+        <property name="locationname" type="string">
+            <column name="LOCATIONNAME" length="20" />
+        </property>
+        <property name="locationStreet" type="string">
+            <column name="LOCATION_STREET" length="50" />
+        </property>
+        <property name="locationCity" type="string">
+            <column name="LOCATION_CITY" length="30" />
+        </property>
+        <property name="priceType" type="string">
+            <column name="PRICE_TYPE" length="10" />
+        </property>
+        <set name="schedules" table="schedule" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="LOCATIONID" length="25" not-null="true" />
+            </key>
+            <one-to-many class="Model.Schedule" />
+        </set>
+        <set name="assignments" table="assignment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="LOCATIONID" length="25" not-null="true" />
+            </key>
+            <one-to-many class="Model.Assignment" />
+        </set>
+    </class>
+</hibernate-mapping>

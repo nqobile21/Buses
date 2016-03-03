@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Ticket" table="ticket" catalog="vutbus" optimistic-lock="version">
+        <id name="ticketcode" type="string">
+            <column name="TICKETCODE" length="15" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="student" class="Model.Student" fetch="select">
+            <column name="STUDENTNO" length="9" not-null="true" />
+        </many-to-one>
+        <property name="duration" type="string">
+            <column name="DURATION" length="20" />
+        </property>
+        <property name="ticketDate" type="date">
+            <column name="TICKET_DATE" length="10" />
+        </property>
+        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TICKETCODE" length="15" not-null="true" />
+            </key>
+            <one-to-many class="Model.Payment" />
+        </set>
+    </class>
+</hibernate-mapping>

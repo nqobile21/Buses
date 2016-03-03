@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Schedule" table="schedule" catalog="vutbus" optimistic-lock="version">
+        <id name="scheduleno" type="string">
+            <column name="SCHEDULENO" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="location" class="Model.Location" fetch="select">
+            <column name="LOCATIONID" length="25" not-null="true" />
+        </many-to-one>
+        <property name="startPoint" type="string">
+            <column name="START_POINT" length="25" />
+        </property>
+        <property name="endPoint" type="string">
+            <column name="END_POINT" length="25" />
+        </property>
+        <property name="scheduleDate" type="date">
+            <column name="SCHEDULE_DATE" length="10" />
+        </property>
+        <property name="scheduleTime" type="string">
+            <column name="SCHEDULE_TIME" length="12" />
+        </property>
+    </class>
+</hibernate-mapping>

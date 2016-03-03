@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Payment" table="payment" catalog="vutbus" optimistic-lock="version">
+        <id name="paymentid" type="string">
+            <column name="PAYMENTID" length="12" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employee" class="Model.Employee" fetch="select">
+            <column name="EMPL_NO" length="15" not-null="true" />
+        </many-to-one>
+        <many-to-one name="student" class="Model.Student" fetch="select">
+            <column name="STUDENTNO" length="9" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ticket" class="Model.Ticket" fetch="select">
+            <column name="TICKETCODE" length="15" not-null="true" />
+        </many-to-one>
+        <property name="paymentDate" type="date">
+            <column name="PAYMENT_DATE" length="10" />
+        </property>
+        <property name="paymentTime" type="string">
+            <column name="PAYMENT_TIME" length="12" />
+        </property>
+        <property name="amountDue" type="java.lang.Double">
+            <column name="AMOUNT_DUE" precision="7" />
+        </property>
+        <property name="amountPayed" type="java.lang.Double">
+            <column name="AMOUNT_PAYED" precision="7" />
+        </property>
+        <property name="paymentType" type="string">
+            <column name="PAYMENT_TYPE" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

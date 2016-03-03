@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Bus" table="bus" catalog="vutbus" optimistic-lock="version">
+        <id name="regno" type="string">
+            <column name="REGNO" length="12" />
+            <generator class="assigned" />
+        </id>
+        <property name="model" type="string">
+            <column name="MODEL" length="15" />
+        </property>
+        <property name="capacity" type="int">
+            <column name="CAPACITY" not-null="true" />
+        </property>
+        <set name="assignments" table="assignment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REGNO" length="12" not-null="true" />
+            </key>
+            <one-to-many class="Model.Assignment" />
+        </set>
+        <set name="students" table="student" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REGNO" length="12" not-null="true" />
+            </key>
+            <one-to-many class="Model.Student" />
+        </set>
+    </class>
+</hibernate-mapping>

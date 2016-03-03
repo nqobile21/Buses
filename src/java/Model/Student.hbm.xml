@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Student" table="student" catalog="vutbus" optimistic-lock="version">
+        <id name="studentno" type="string">
+            <column name="STUDENTNO" length="9" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="bus" class="Model.Bus" fetch="select">
+            <column name="REGNO" length="12" not-null="true" />
+        </many-to-one>
+        <many-to-one name="employee" class="Model.Employee" fetch="select">
+            <column name="EMPL_NO" length="15" not-null="true" />
+        </many-to-one>
+        <property name="studentIdno" type="string">
+            <column name="STUDENT_IDNO" length="20" not-null="true" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="FIRSTNAME" length="30" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="LASTNAME" length="30" />
+        </property>
+        <property name="gender" type="string">
+            <column name="GENDER" length="2" />
+        </property>
+        <property name="telephoneNo" type="string">
+            <column name="TELEPHONE_NO" length="10" />
+        </property>
+        <property name="dob" type="date">
+            <column name="DOB" length="10" />
+        </property>
+        <property name="street" type="string">
+            <column name="STREET" length="50" />
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="30" />
+        </property>
+        <property name="province" type="string">
+            <column name="PROVINCE" length="25" />
+        </property>
+        <property name="country" type="string">
+            <column name="COUNTRY" length="30" />
+        </property>
+        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="STUDENTNO" length="9" not-null="true" />
+            </key>
+            <one-to-many class="Model.Payment" />
+        </set>
+        <set name="tickets" table="ticket" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="STUDENTNO" length="9" not-null="true" />
+            </key>
+            <one-to-many class="Model.Ticket" />
+        </set>
+    </class>
+</hibernate-mapping>

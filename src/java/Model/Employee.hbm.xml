@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Feb 2016 10:33:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Employee" table="employee" catalog="vutbus" optimistic-lock="version">
+        <id name="emplNo" type="string">
+            <column name="EMPL_NO" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="empFirstname" type="string">
+            <column name="EMP_FIRSTNAME" length="30" />
+        </property>
+        <property name="empLastname" type="string">
+            <column name="EMP_LASTNAME" length="30" />
+        </property>
+        <property name="gender" type="string">
+            <column name="GENDER" length="2" />
+        </property>
+        <property name="telephoneNo" type="string">
+            <column name="TELEPHONE_NO" length="10" />
+        </property>
+        <property name="street" type="string">
+            <column name="STREET" length="50" />
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="30" />
+        </property>
+        <property name="province" type="string">
+            <column name="PROVINCE" length="25" />
+        </property>
+        <property name="postalCode" type="java.lang.Integer">
+            <column name="POSTAL_CODE" />
+        </property>
+        <property name="dateHired" type="date">
+            <column name="DATE_HIRED" length="10" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" length="30" />
+        </property>
+        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="EMPL_NO" length="15" not-null="true" />
+            </key>
+            <one-to-many class="Model.Payment" />
+        </set>
+        <set name="students" table="student" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="EMPL_NO" length="15" not-null="true" />
+            </key>
+            <one-to-many class="Model.Student" />
+        </set>
+    </class>
+</hibernate-mapping>
